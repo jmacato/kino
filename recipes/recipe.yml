@@ -43,6 +43,7 @@ modules:
        - asusctl
        - asusctl-rog-gui
        - supergfxctl
+       - minicom
     remove:
        - noopenh264
        - firefox
