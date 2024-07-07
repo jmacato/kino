@@ -46,7 +46,9 @@ modules:
        - supergfxctl
        - minicom
        - ksshaskpass
-       - looking-glass-client 
+       - looking-glass-client
+       - akmod-nvidia
+       - xorg-x11-drv-nvidia-cuda
     remove:
        - noopenh264
        - firefox
