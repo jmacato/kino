@@ -47,8 +47,7 @@ modules:
        - minicom
        - ksshaskpass
        - looking-glass-client
-       - akmod-nvidia
-       - xorg-x11-drv-nvidia-cuda
+       - ffmpeg
     remove:
        - noopenh264
        - firefox
