@@ -32,7 +32,7 @@ modules:
        - lld 
        - llvm 
        - python3-zombie-imp 
-       - qemu qemu-kvm-core 
+       - qemu
        - rclone 
        - virt-manager 
        - zlib-devel 
