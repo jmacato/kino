@@ -48,6 +48,8 @@ modules:
        - ksshaskpass
        - looking-glass-client
        - ffmpeg
+       - akmod-nvidia
+       - xorg-x11-drv-nvidia-cuda
     remove:
        - noopenh264
        - firefox
