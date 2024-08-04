@@ -19,37 +19,10 @@ modules:
   - type: rpm-ostree
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
-       - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
-       - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
+      # - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
+      # - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
-       - accerciser 
-       - gcc 
-       - clang 
-       - d-feet 
-       - distrobox 
-       - edk2-ovmf 
-       - libvirt 
-       - lld 
-       - llvm 
-       - python3-zombie-imp 
-       - qemu
-       - rclone 
-       - virt-manager 
-       - zlib-devel 
-       - zlibrary-devel
-       # - openh264
-       - perl
-       - npm
-       - vlc
-       - asusctl
-       - asusctl-rog-gui
-       - supergfxctl
-       - minicom
-       - ksshaskpass
-       - looking-glass-client
-       - ffmpeg
     remove:
-      # - noopenh264
        - firefox
        - firefox-langpacks
       # example: removing firefox (in favor of the flatpak)
