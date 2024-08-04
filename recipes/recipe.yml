@@ -32,12 +32,13 @@ modules:
        - lld 
        - llvm 
        - python3-zombie-imp 
-       - qemu qemu-kvm-core 
+       - qemu 
+       # - qemu-kvm-core 
        - rclone 
        - virt-manager 
        - zlib-devel 
        - zlibrary-devel
-       - openh264
+       # - openh264
        - perl
        - npm
        - vlc
@@ -49,7 +50,7 @@ modules:
        - looking-glass-client
        - ffmpeg
     remove:
-       - noopenh264
+       # - noopenh264
        - firefox
        - firefox-langpacks
       # example: removing firefox (in favor of the flatpak)
