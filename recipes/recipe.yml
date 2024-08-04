@@ -4,7 +4,7 @@ name: kino
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/ublue-os/silverblue-nvidia
 image-version: 40 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -48,8 +48,6 @@ modules:
        - ksshaskpass
        - looking-glass-client
        - ffmpeg
-       - akmod-nvidia
-       - xorg-x11-drv-nvidia-cuda
     remove:
        - noopenh264
        - firefox
