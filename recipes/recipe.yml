@@ -37,7 +37,7 @@ modules:
        - virt-manager 
        - zlib-devel 
        - zlibrary-devel
-       - openh264
+       # - openh264
        - perl
        - npm
        - vlc
