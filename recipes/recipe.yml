@@ -4,7 +4,7 @@ name: kino
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-nvidia
+base-image: ghcr.io/ublue-os/silverblue-main
 image-version: 40 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -22,16 +22,16 @@ modules:
        - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
        - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
-      # - accerciser 
-      # - gcc 
-      # - clang 
-      # - d-feet 
+       - accerciser 
+       - gcc 
+       - clang 
+       - d-feet 
        - distrobox 
        - edk2-ovmf 
        - libvirt 
-      # - lld 
-      # - llvm 
-      # - python3-zombie-imp 
+       - lld 
+       - llvm 
+       - python3-zombie-imp 
        - qemu 
        # - qemu-kvm-core 
        - rclone 
@@ -39,7 +39,7 @@ modules:
        - zlib-devel 
        - zlibrary-devel
        # - openh264
-       # - perl
+        - perl
        - npm
        - vlc
        - asusctl
