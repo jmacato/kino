@@ -22,16 +22,16 @@ modules:
        - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
        - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
-       - accerciser 
+      # - accerciser 
       # - gcc 
       # - clang 
-       - d-feet 
+      # - d-feet 
        - distrobox 
        - edk2-ovmf 
        - libvirt 
-       - lld 
-       - llvm 
-       - python3-zombie-imp 
+      # - lld 
+      # - llvm 
+      # - python3-zombie-imp 
        - qemu 
        # - qemu-kvm-core 
        - rclone 
@@ -39,7 +39,7 @@ modules:
        - zlib-devel 
        - zlibrary-devel
        # - openh264
-       - perl
+       # - perl
        - npm
        - vlc
        - asusctl
