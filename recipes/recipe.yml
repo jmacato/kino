@@ -23,8 +23,8 @@ modules:
        - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
        - accerciser 
-       - gcc 
-       - clang 
+      # - gcc 
+      # - clang 
        - d-feet 
        - distrobox 
        - edk2-ovmf 
