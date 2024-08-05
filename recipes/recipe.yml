@@ -39,7 +39,7 @@ modules:
        - zlib-devel 
        - zlibrary-devel
        # - openh264
-        - perl
+       - perl
        - npm
        - vlc
        - asusctl
