@@ -32,13 +32,13 @@ modules:
        - lld 
        - llvm 
        - python3-zombie-imp 
-       - qemu 
-       # - qemu-kvm-core 
+       - qemu
+       - qemu-kvm-core 
        - rclone 
        - virt-manager 
        - zlib-devel 
        - zlibrary-devel
-       # - openh264
+       - openh264
        - perl
        - npm
        - vlc
@@ -50,7 +50,7 @@ modules:
        - looking-glass-client
        - ffmpeg
     remove:
-       # - noopenh264
+       - noopenh264
        - firefox
        - firefox-langpacks
       # example: removing firefox (in favor of the flatpak)
@@ -62,9 +62,9 @@ modules:
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
       # If no repo information is specified, Flathub will be used by default
-      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      repo-name: flathub
-      repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
+      # repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      # repo-name: flathub
+      # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
         - org.mozilla.firefox
         # - org.gnome.Loupe
