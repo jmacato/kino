@@ -19,6 +19,7 @@ modules:
   - type: rpm-ostree
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+       - https://codecs.fedoraproject.org/openh264/40/odcs-29648.repo
        - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
        - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
@@ -38,7 +39,7 @@ modules:
        - virt-manager 
        - zlib-devel 
        - zlibrary-devel
-       - x264
+       - openh264
        - perl
        - npm
        - vlc
