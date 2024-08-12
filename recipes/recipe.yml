@@ -4,7 +4,7 @@ name: kino
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-nvidia
+base-image: ghcr.io/ublue-os/silverblue-main
 image-version: 40 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -19,7 +19,6 @@ modules:
   - type: rpm-ostree
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
-       - https://codecs.fedoraproject.org/openh264/40/odcs-29648.repo
        - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
        - https://copr.fedorainfracloud.org/coprs/pgaskin/looking-glass-client/repo/fedora-%OS_VERSION%/pgaskin-looking-glass-client-fedora-%OS_VERSION%.repo
     install:
@@ -39,7 +38,7 @@ modules:
        - virt-manager 
        - zlib-devel 
        - zlibrary-devel
-       - openh264
+      # - openh264
        - perl
        - npm
        - vlc
@@ -51,7 +50,7 @@ modules:
        - looking-glass-client
        - ffmpeg
     remove:
-       - noopenh264
+      # - noopenh264
        - firefox
        - firefox-langpacks
       # example: removing firefox (in favor of the flatpak)
