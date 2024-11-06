@@ -49,6 +49,7 @@ modules:
        - ksshaskpass
        - looking-glass-client
        - ffmpeg
+       - webkit2gtk4.0-devel
     remove:
       # - noopenh264
        - firefox
