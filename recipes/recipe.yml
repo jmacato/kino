@@ -64,7 +64,7 @@ modules:
       # repo-name: flathub
       # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
-        - org.mozilla.firefoX
+        - org.mozilla.firefox
       remove:
         - org.gnome.eog
     user: {} # Also add Flathub user repo, but no user packages
