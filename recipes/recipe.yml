@@ -1,6 +1,7 @@
+---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
-name: kino
+name: template
 # description will be included in the image's metadata
 description: This is my personal OS image.
 
@@ -13,9 +14,8 @@ image-version: 41 # latest is also supported if you want new updates ASAP
 modules:
   - type: files
     files:
-      - usr: /usr # copies config/files/usr into your image's /usr.
-                  # put configuration files you want in /etc/ on a booted system 
-                  # in /usr/etc/ in the image. read more in files module reference.
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: rpm-ostree
     repos:
@@ -55,17 +55,15 @@ modules:
     remove:
       # - noopenh264
        - firefox
-       - firefox-langpacks 
+       - firefox-langpacks
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
       # If no repo information is specified, Flathub will be used by default
-      # repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      # repo-name: flathub
-      # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
         - org.mozilla.firefox
+        - org.gnome.Loupe
       remove:
         - org.gnome.eog
     user: {} # Also add Flathub user repo, but no user packages
