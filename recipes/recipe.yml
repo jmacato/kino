@@ -26,6 +26,7 @@ modules:
        - accerciser 
        - gcc 
        - clang 
+       - lld-devel
        - d-feet 
        - distrobox 
        - edk2-ovmf 
