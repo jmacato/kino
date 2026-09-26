@@ -1,43 +1,72 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# Kino
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+[![Build](https://github.com/jmacato/kino/actions/workflows/build.yml/badge.svg)](https://github.com/jmacato/kino/actions/workflows/build.yml)
 
-After setup, it is recommended you update this README to describe your custom image.
+Personal Fedora Silverblue image published as `ghcr.io/jmacato/kino:latest`.
+It follows the latest stable [BlueBuild Silverblue NVIDIA open image](https://github.com/blue-build/base-images), currently Fedora 44.
+The `latest` base tag also follows future stable Fedora releases.
 
-## Installation
+The base supplies NVIDIA's open kernel modules for Turing and newer GPUs,
+including the RTX 3060 Laptop, along with matching graphics and CUDA driver
+libraries, `nvidia-smi`, NVIDIA Container Toolkit, and video acceleration.
+Kino adds ASUS controls, Looking Glass, virtualization and development tools,
+and Firefox and Loupe from Flathub. The retired WebKitGTK 4.0 development
+package is replaced by WebKitGTK 4.1; applications using it may need porting.
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+## Build
 
-To rebase an existing atomic Fedora installation to the latest build:
+GitHub Actions builds daily and on pushes to `main`, signs with the existing
+`SIGNING_SECRET`, and publishes to GHCR. Pull requests and the migration branch
+build without publishing. The build checks that NVIDIA's open kernel modules
+match both the image kernel and userspace driver, and that CUDA/container
+tools and NVIDIA boot arguments are present. Actual GPU operation is checked
+after booting the image.
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
-
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
-
-## ISO
-
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
-
-## Verification
-
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Local recipe validation:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
+bluebuild validate recipes/recipe.yml
+```
+
+## Upgrade an existing Kino installation
+
+Wait for a successful build on `main`. On an existing signed Kino installation,
+stage the new image with:
+
+```bash
+sudo rpm-ostree upgrade
+```
+
+Review any dependency errors from locally layered packages before rebooting.
+Older Fedora 41 installations use rpm-ostree and may not import the NVIDIA
+boot arguments embedded in the new base. After successfully staging the image,
+set them explicitly:
+
+```bash
+sudo rpm-ostree kargs \
+  --append-if-missing=rd.driver.blacklist=nouveau \
+  --append-if-missing=modprobe.blacklist=nouveau \
+  --append-if-missing=nvidia-drm.modeset=1 \
+  --append-if-missing=nvidia-drm.fbdev=1 \
+  --delete-if-present=nomodeset
+```
+
+The new base uses BlueBuild's kernel/module signing key. If Secure Boot is
+enabled, enroll that key using the [upstream migration instructions](https://github.com/blue-build/base-images#migration-from-ublue-base-images)
+before booting it. No enrollment is needed while Secure Boot is disabled.
+
+Reboot when ready, then verify:
+
+```bash
+nvidia-smi
+lspci -nnk -d 10de:2520
+```
+
+The GPU should report `Kernel driver in use: nvidia`. If the new deployment
+fails to boot, select the previous deployment in the boot menu.
+
+## Verify the published image
+
+```bash
+cosign verify --key cosign.pub ghcr.io/jmacato/kino:latest
 ```
