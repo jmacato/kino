@@ -30,8 +30,22 @@ bluebuild validate recipes/recipe.yml
 
 ## Upgrade an existing Kino installation
 
-Wait for a successful build on `main`. On an existing signed Kino installation,
-stage the new image with:
+Wait for a successful build on `main` and update this checkout. Verify the
+published image against the repository's current signing key:
+
+```bash
+cosign verify --key cosign.pub ghcr.io/jmacato/kino:latest
+```
+
+Older Kino deployments can still trust an earlier image-signing key. If
+`/etc/pki/containers/kino.pub` differs from this repository's `cosign.pub`,
+install the verified current public key before upgrading:
+
+```bash
+sudo install -m 0644 cosign.pub /etc/pki/containers/kino.pub
+```
+
+Then stage the new image:
 
 ```bash
 sudo rpm-ostree upgrade
