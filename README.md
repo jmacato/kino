@@ -22,6 +22,10 @@ match both the image kernel and userspace driver, and that CUDA/container
 tools and NVIDIA boot arguments are present. Actual GPU operation is checked
 after booting the image.
 
+Images are exported with OSTree encapsulation so Fedora 41's `rpm-ostree`
+can import them. CI checks the published `ostree.final-diffid` metadata;
+a plain bootc image without this metadata cannot be used by that older client.
+
 Local recipe validation:
 
 ```bash

@@ -43,5 +43,18 @@ jobs:
           # Candidate builds validate the image; only main publishes updates.
           push: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
 
+          # Fedora 41's rpm-ostree needs OSTree encapsulation (ostree.final-diffid).
+          # build_chunked_oci now defaults to format v2, which does not provide it.
+          rechunk: true
+
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
+
+      - name: Verify published image supports rpm-ostree upgrades
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo podman run --rm --entrypoint skopeo ghcr.io/hhd-dev/rechunk:v1.0.1 \
+            inspect docker://ghcr.io/jmacato/kino:latest |
+            jq -e '.Labels["ostree.final-diffid"] | strings | startswith("sha256:")'
