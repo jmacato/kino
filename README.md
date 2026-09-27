@@ -77,6 +77,17 @@ sudo ln -sfn RPM-GPG-KEY-fedora-44-primary /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-4
 sudo rpm-ostree upgrade
 ```
 
+If dependency resolution reports `Packages not found: srm`, remove that old
+layered package request while staging the upgrade. The Fedora 44 repositories
+used by this image do not provide it:
+
+```bash
+sudo rpm-ostree upgrade --uninstall=srm
+```
+
+This removes `srm` from the new deployment and preserves the other layered
+package requests. The currently booted deployment is unchanged until reboot.
+
 Older Fedora 41 installations use rpm-ostree and may not import the NVIDIA
 boot arguments embedded in the new base. After successfully staging the image,
 set them explicitly:
