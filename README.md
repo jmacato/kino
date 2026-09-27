@@ -56,6 +56,27 @@ sudo rpm-ostree upgrade
 ```
 
 Review any dependency errors from locally layered packages before rebooting.
+If upgrading from Fedora 41 stops because
+`RPM-GPG-KEY-fedora-44-x86_64` is missing, the image has already been imported,
+but the old host lacks Fedora 44's package-signing key. Extract it from that
+signature-verified image and install it before retrying:
+
+```bash
+ostree --repo=/sysroot/ostree/repo cat \
+  'ostree/container/image/docker_3A__2F__2F_ghcr_2E_io/jmacato/kino_3A_latest' \
+  /usr/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-44-primary > /tmp/kino-fedora44.pub
+gpg --show-keys --with-fingerprint /tmp/kino-fedora44.pub
+```
+
+The Fedora 44 key fingerprint is
+`36F6 12DC F27F 7D1A 48A8 35E4 DBFC F71C 6D9F 90A6`. After confirming it:
+
+```bash
+sudo install -m 0644 /tmp/kino-fedora44.pub /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-44-primary
+sudo ln -sfn RPM-GPG-KEY-fedora-44-primary /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-44-x86_64
+sudo rpm-ostree upgrade
+```
+
 Older Fedora 41 installations use rpm-ostree and may not import the NVIDIA
 boot arguments embedded in the new base. After successfully staging the image,
 set them explicitly:
